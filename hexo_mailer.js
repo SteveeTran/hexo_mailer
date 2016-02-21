@@ -31,4 +31,4 @@ var csvParse = function(csvFile){
 
 var csv_data = csvParse(csvFile);
 
-console.log(csv_data);
+console.log("lol");
