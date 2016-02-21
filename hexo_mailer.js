@@ -1,13 +1,7 @@
 var fs = require('fs');
 
 var csvFile = fs.readFileSync("friend_list.csv", "utf8");
-
-// var Person = function(first_name, last_name, monnths_since_contact, email_address){
-//   this.first_name = first_name;
-//   this.last_name = last_name;
-//   this.monnths_since_contact = monnths_since_contact;
-//   this.email_address = email_address;
-// }
+var emailTemplate = fs.readFileSync("emailTemplate.html", "utf8");
 
 var csvParse = function(csvFile){
   var array_of_people = [];
@@ -29,6 +23,26 @@ var csvParse = function(csvFile){
   return array_of_people;
 }
 
-var csv_data = csvParse(csvFile);
+friendList = csvParse(csvFile);
 
-console.log("lol");
+friendList.forEach(function(row){
+
+    firstName = row["firstName"];
+    numMonthsSinceContact = row["monthsSinceContact"];
+
+    // we make a copy of the emailTemplate variable to a new variable to ensure
+    // we don't edit the original template text since we'll need to us it for
+    // multiple emails
+
+    templateCopy = emailTemplate;
+
+    // use .replace to replace FIRST_NAME and NUM_MONTHS_SINCE_CONTACT with firstName and  monthsSinceLastContact
+    templateCopy = templateCopy.replace(/FIRST_NAME/gi,
+    firstName).replace(/NUM_MONTHS_SINCE_CONTACT/gi, numMonthsSinceContact);
+
+    console.log(templateCopy);
+
+
+})
+
+console.log(friendList);
