@@ -1,7 +1,8 @@
 var fs = require('fs');
+var ejs = require('ejs');
 
 var csvFile = fs.readFileSync("friend_list.csv", "utf8");
-var emailTemplate = fs.readFileSync("emailTemplate.html", "utf8");
+var emailTemplate = fs.readFileSync("email_template.ejs", "utf8");
 
 var csvParse = function(csvFile){
   var array_of_people = [];
